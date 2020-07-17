@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 
 from main.models.db import db
 from main.routes import load_routes
@@ -11,6 +12,7 @@ def create_app(config_name):
     application = Flask(__name__)
     jwt = JWTManager(application)
     flask_bcrypt = Bcrypt()
+    CORS(application, resources={r'/api/v1/*': { 'origins': '*' }})
 
     application.config.from_object(config_by_name[config_name])
     flask_bcrypt.init_app(application)

@@ -41,6 +41,7 @@ class ClientController:
     def client_update(cls, client_id):
         name = request.json.get('name', None)
         email = request.json.get('email', None)
+        password = request.json.get('password', None)
         
         if name is None or email is None:
             return make_response(jsonify({ 'msg': 'Name and Email are required' }), 400)
@@ -52,6 +53,9 @@ class ClientController:
 
         client.name = name
         client.email = email
+
+        if password != '':
+            client.password = password
 
         db.session.commit()
 

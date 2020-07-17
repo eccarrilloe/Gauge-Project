@@ -23,12 +23,16 @@ class AuthController:
         client = Client.query.filter_by(email=email).first()
 
         if client is None:
-            return make_response(jsonify({'msg': 'User/Password are invalid'}), 401)
+            return make_response(jsonify({'msg': 'User/Password are invalid'}), 400)
 
         valid_login = client.check_password(password)
 
         if not valid_login:
-            return make_response(jsonify({'msg': 'User/Password are invalid'}), 401)
+            return make_response(jsonify({'msg': 'User/Password are invalid'}), 400)
 
         access_token = create_access_token(identity=email)
-        return make_response(jsonify(access_token=access_token), 200)
+        response = dict(
+            client=client.serialize,
+            token=access_token
+        )
+        return make_response(jsonify(response), 200)

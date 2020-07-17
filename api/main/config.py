@@ -10,6 +10,7 @@ class Config():
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    CORS_HEADERS = 'Content-Type'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'main.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PROPAGATE_EXCEPTIONS = True
