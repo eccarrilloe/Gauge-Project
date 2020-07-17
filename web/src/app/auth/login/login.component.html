@@ -1,1 +1,38 @@
-<p>login works!</p>
+<p class="login-box-msg">Sign in to start your session</p>
+<form [formGroup]="loginForm" (submit)="login()">
+  <div class="form-group mb-3">
+    <div class="input-group">
+      <input type="email" class="form-control" placeholder="Email" autocomplete="off" formControlName="email">
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <span class="fas fa-envelope"></span>
+        </div>
+      </div>
+    </div>
+    <span class="text-danger text-center" *ngIf="loginForm.controls.email.hasError('required') && loginForm.controls.email.dirty">
+      This field is required
+    </span>
+    <span class="text-danger text-center" *ngIf="loginForm.controls.email.hasError('email') && loginForm.controls.email.dirty">
+      This field must contains a valid email
+    </span>
+  </div>
+  <div class="form-group mb-3">
+    <div class="input-group">
+      <input type="password" class="form-control" placeholder="Password" autocomplete="off" formControlName="password">
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <span class="fas fa-lock"></span>
+        </div>
+      </div>
+    </div>
+    <span class="text-danger text-center" *ngIf="loginForm.controls.password.hasError('required') && loginForm.controls.password.dirty">
+      This field is required
+    </span>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button type="submit" [disabled]="loginForm.invalid || loggingIn" class="btn btn-block btn-flat btn-primary btn-block">{{ loginMessage }}</button>
+    </div>
+    <!-- /.col -->
+  </div>
+</form>

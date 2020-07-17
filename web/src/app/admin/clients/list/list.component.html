@@ -1,0 +1,62 @@
+<div class="col-12">
+  <div class="row">
+    <div class="col-12 mb-3">
+      <h2 class="page-header">
+        <i class="fas fa-users"></i> List of Clients
+      </h2>
+    </div>
+    <div class="col-12 mb-2">
+      <button class="btn btn-flat btn-success" (click)="newClient()">
+        Add New <i class="fas fa-plus"></i>
+      </button>
+      <button class="btn btn-flat btn-default ml-1" (click)="refreshClientsList()">
+        Refresh List <i class="fas fa-sync-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="card card-primary box-flat">
+    <div class="card-header box-flat">
+      <h5 class="card-title m-0">List of Clients</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <table class="table" *ngIf="clientsLoaded === true">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients">
+                <td>{{ client.id }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.created | date: 'short' }}</td>
+                <td>
+                  <button class="btn btn-sm btn-flat btn-info" (click)="viewClient(client)">
+                    View <i class="fas fa-search"></i>
+                  </button>
+                  <button class="btn btn-sm btn-flat btn-default ml-1" (click)="editClient(client)">
+                    Edit <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-sm btn-flat btn-danger ml-1" (click)="removeClient(client)">
+                    Remove <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="overlay box-flat" *ngIf="clientsLoading && !clientsLoaded">
+      <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="col-12">
+  <div class="row">
+    <div class="col-12 mb-3">
+      <h2 class="page-header">
+        <i class="fas fa-users"></i> View Client: <small>{{ client?.name }}</small>
+      </h2>
+    </div>
+    <div class="col-12 mb-2">
+      <button class="btn btn-flat btn-default ml-1" (click)="goToList()">
+        <i class="fas fa-chevron-left"></i> Return to list
+      </button>
+      <button class="btn btn-flat btn-primary ml-1" (click)="editClient()">
+        <i class="fas fa-edit"></i> Edit
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-primary card-outline box-flat">
+        <div class="card-header box-flat">
+          <h5 class="card-title m-0">Client Information</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <ul class="client-info-list">
+                <li><b>Name: </b> {{ client?.name }}</li>
+                <li><b>Email: </b> {{ client?.email }}</li>
+                <li><b>Created: </b> {{ client?.created | date: 'short' }}</li>
+                <li><b>Updated: </b> {{ client?.updated | date: 'short' }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="overlay box-flat" *ngIf="clientLoading && !clientLoaded">
+          <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card card-primary card-outline box-flat">
+        <div class="card-header box-flat">
+          <h5 class="card-title m-0">Sockets</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 mb-2">
+              <button class="btn btn-success btn-flat" (click)="activateSocketForm()">
+                Add Socket <i class="fas fa-plus"></i>
+              </button>
+            </div>
+            <div class="col-12">
+              <table class="table" *ngIf="socketsLoaded">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let socket of client.sockets">
+                    <td>{{ socket.id }}</td>
+                    <td>{{ socket.name }} </td>
+                    <td>{{ socket.created | date: 'small' }c}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="overlay box-flat" *ngIf="socketsLoading && !socketsLoaded">
+          <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
