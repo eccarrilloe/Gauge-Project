@@ -1,0 +1,84 @@
+<div class="col-12">
+  <div class="row">
+    <div class="col-12 mb-3">
+      <h2 class="page-header">
+        <i class="fas fa-users"></i> {{ operation }} Socket
+      </h2>
+    </div>
+    <div class="col-12 mb-2">
+      <button class="btn btn-flat btn-default ml-1" (click)="goToList()">
+        <i class="fas fa-chevron-left"></i> Return to list
+      </button>
+    </div>
+  </div>
+
+  <div class="card card-primary box-flat">
+    <div class="card-header box-flat">
+      <h5 class="card-title m-0">{{ operation }} Socket</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <form [formGroup]="socketForm" (submit)="saveSocket()">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group" *ngIf="clientId">
+                  <label class="control-label">Id</label>
+                  <input type="text" class="form-control" formControlName="id" readonly>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Name</label>
+                  <input type="text" class="form-control" formControlName="name">
+                  <span class="text-danger text-center" *ngIf="clientForm.controls.name.hasError('required') && clientForm.controls.name.dirty">
+                    This field is required
+                  </span>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Email</label>
+                  <input type="text" class="form-control" formControlName="email">
+                  <span class="text-danger text-center" *ngIf="clientForm.controls.email.hasError('required') && clientForm.controls.email.dirty">
+                    This field is required
+                  </span>
+                  <span class="text-danger text-center" *ngIf="clientForm.controls.email.hasError('email') && clientForm.controls.email.dirty">
+                    This field must contains a valid email
+                  </span>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Password</label>
+                  <input type="password" class="form-control" formControlName="password">
+                  <span class="text-danger text-center" *ngIf="!clientId && clientForm.controls.password.hasError('required') && clientForm.controls.password.dirty">
+                    This field is required
+                  </span>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label class="control-label">Confirm password</label>
+                  <input type="password" class="form-control" formControlName="confirmPassword">
+                  <span class="text-danger text-center" *ngIf="(clientForm.controls.password.dirty || clientForm.controls.confirmPassword.dirty) && clientForm.errors && clientForm.errors.notSame">
+                    Password and password confirmation fields must be equal
+                  </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-flat btn-primary float-right" [disabled]="clientForm.invalid">
+                  Save <i class="fas fa-save"></i>
+                </button>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="overlay box-flat" *ngIf="clientLoading && !clientLoaded">
+      <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+    </div>
+  </div>
+</div>

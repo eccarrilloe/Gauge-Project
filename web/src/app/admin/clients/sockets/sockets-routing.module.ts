@@ -7,19 +7,18 @@ import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [{
   path: '',
-  component: ListComponent,
-  pathMatch: 'full'
+  component: ListComponent
 }, {
-  path: 'view/:clientId',
+  path: 'view/:id',
   component: ViewComponent
-}, {
-  path: 'view/:clientId/sockets',
-  loadChildren: () => import('./sockets/sockets.module').then(m => m.SocketsModule)
 }, {
   path: 'create',
   component: FormComponent
 }, {
-  path: 'edit/:clientId',
+  path: 'view/:id/gauges',
+  loadChildren: () => import('./gauges/gauges.module').then((m) => m.GaugesModule)
+}, {
+  path: 'edit/:id',
   component: FormComponent
 }];
 
@@ -27,4 +26,4 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ClientsRoutingModule { }
+export class SocketsRoutingModule { }

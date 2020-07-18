@@ -41,8 +41,8 @@ export class FormComponent implements OnInit {
     this.clientLoaded = false;
 
     this.activeRoute.params.subscribe((params) => {
-      if (params.id) {
-        this.clientId = params.id;
+      if (params.clientId) {
+        this.clientId = params.clientId;
         this.operation = 'Edit';
 
         this.clientService.getClient(this.clientId).subscribe((client: Client) => {

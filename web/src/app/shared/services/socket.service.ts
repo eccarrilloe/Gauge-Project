@@ -14,7 +14,12 @@ export class SocketService {
   constructor(private http: HttpClient) { }
 
   public getSocketsByClientId(clientId: number): Observable<Socket[]> {
-    const socketUrl = this.socketsUrl.replace('{clientId}', clientId.toString())
+    const socketUrl = this.socketsUrl.replace('{clientId}', clientId.toString());
     return this.http.get<Socket[]>(socketUrl);
+  }
+
+  public removeSocket(clientId: number, socketId: number) {
+    const socketUrl = this.socketsUrl.replace('{clientId}', clientId.toString());
+    return this.http.delete(`${socketUrl}/${socketId}`);
   }
 }

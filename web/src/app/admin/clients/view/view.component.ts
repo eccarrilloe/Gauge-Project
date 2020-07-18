@@ -38,26 +38,13 @@ export class ViewComponent implements OnInit {
     this.clientLoaded = false;
 
     this.activeRoute.params.subscribe((params) => {
-      this.clientId = params.id;
+      this.clientId = params.clientId;
 
       this.clientService.getClient(this.clientId).subscribe((client: Client) => {
         this.client = new Client(client);
         this.clientLoading = false;
         this.clientLoaded = true;
-
-        this.refreshSocketsData();
       });
-    });
-  }
-
-  public refreshSocketsData() {
-    this.socketsLoading = true;
-    this.socketsLoaded = false;
-    this.socketsService.getSocketsByClientId(this.clientId).subscribe((sockets: Socket[]) => {
-      this.client.setSockets(sockets);
-
-      this.socketsLoading = false;
-      this.socketsLoaded = true;
     });
   }
 
@@ -65,12 +52,12 @@ export class ViewComponent implements OnInit {
     return this.location.back();
   }
 
-  public editClient() {
-    return this.router.navigate(['admin', 'clients', 'edit', this.clientId]);
+  public goToSocketsList() {
+    return this.router.navigate(['admin', 'clients', 'view', this.clientId, 'sockets']);
   }
 
-  public activateSocketForm() {
-    this.showSocketForm = true;
+  public editClient() {
+    return this.router.navigate(['admin', 'clients', 'edit', this.clientId]);
   }
 
 }

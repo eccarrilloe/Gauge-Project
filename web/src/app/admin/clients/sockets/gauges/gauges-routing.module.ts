@@ -1,25 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
-import { FormComponent } from './form/form.component';
 import { ViewComponent } from './view/view.component';
+import { FormComponent } from './form/form.component';
 
 
 const routes: Routes = [{
   path: '',
-  component: ListComponent,
-  pathMatch: 'full'
+  component: ListComponent
 }, {
-  path: 'view/:clientId',
+  path: 'view/:id',
   component: ViewComponent
-}, {
-  path: 'view/:clientId/sockets',
-  loadChildren: () => import('./sockets/sockets.module').then(m => m.SocketsModule)
 }, {
   path: 'create',
   component: FormComponent
 }, {
-  path: 'edit/:clientId',
+  path: 'edit/:id',
   component: FormComponent
 }];
 
@@ -27,4 +23,4 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ClientsRoutingModule { }
+export class GaugesRoutingModule { }
